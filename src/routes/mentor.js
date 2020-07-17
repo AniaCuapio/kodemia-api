@@ -1,5 +1,5 @@
 const express = require('express')
-const mentors = require('../usecases/mentors')
+const mentors = require('../usecases/mentor')
 
 const { response } = require('express')
 

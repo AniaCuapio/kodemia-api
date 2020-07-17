@@ -23,7 +23,7 @@ const mentorSchema = new mongoose.Schema({
             'male',
             'nonbinary'
         ]
-    }
+    },
     course: {
         type: String,
         required: true,

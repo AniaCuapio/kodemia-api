@@ -9,7 +9,7 @@ app.use(express.json())
 
 //montando el router
 app.use('/koders', kodersRouter)
-App.use('/mentors', mentorsRouter)
+app.use('/mentors', mentorsRouter)
 
 app.get('/', (request, response) => {
     response.json({
