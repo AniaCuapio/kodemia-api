@@ -1,18 +1,18 @@
 const express = require('express')
-const koders = require('../usecases/koders')
+const mentors = require('../usecases/mentors')
+
 const { response } = require('express')
 
 const router = express.Router()
 
-
-// localhost:8080/koders
+// localhost:8080/mentors
 router.get('/', async (request, response) => {
     try {
-        const allKoders = await koders.getAll()
+        const allMentors = await mentors.getAll()
         response.json({
             success: true,
             data: {
-                koders: allKoders
+                mentors: allMentors
             }
         })
     } catch (error) {
@@ -26,12 +26,12 @@ router.get('/', async (request, response) => {
 
 router.post('/', async (request, response) => {
     try {
-        const newKodersData = request.body
-        const newKoder = await koders.create(newKodersData)
+        const newMentorsData = request.body
+        const newMentor = await mentors.create(newMentorsData)
         response.json({
             success: true,
             data: {
-                newKoder
+                newMentor
             }
         })
     } catch (error) {
@@ -46,11 +46,11 @@ router.post('/', async (request, response) => {
 router.delete('/:id', async (request, response) => {
     try {
         const id = request.params.id
-        const remove = await koders.remove(id)
+        const remove = await mentors.remove(id)
 
         response.json({
             success: true,
-            message: 'Koder deleted'
+            message: 'Mentor deleted'
         })
     } catch (error) {
         response.status(400)
@@ -65,11 +65,11 @@ router.patch('/:id', (request, response) => {
     try {
         const id = request.params.id
         const newData = request.body
-        const update = koders.update(id, newData)
+        const update = mentors.update(id, newData)
 
         response.json({
             success: true,
-            message: 'Koder data updated'
+            message: 'Mentor data updated'
         })
     } catch (error) {
         response.status(400)
@@ -79,6 +79,5 @@ router.patch('/:id', (request, response) => {
         })
     }
 })
-
 
 module.exports = router
