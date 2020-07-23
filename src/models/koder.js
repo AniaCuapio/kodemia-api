@@ -22,6 +22,20 @@ const koderSchema = new mongoose.Schema({
             'male',
             'nonbinary'
         ]
+    },
+    email: {
+        type: String,
+        required: true,
+        match: /^.+@.+\..+$/
+    },
+    password: {
+        type: String,
+        required: true,
+        min: 5
+    },
+    generation: {
+        type: Number,
+        required: true,
     }
 })
 

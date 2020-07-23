@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 //Schema
-
 const mentorSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,6 +26,16 @@ const mentorSchema = new mongoose.Schema({
     course: {
         type: String,
         required: true,
+    },
+    mail: {
+        type: String,
+        required: true,
+        maxlength: 60,
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 5,
     }
 })
 

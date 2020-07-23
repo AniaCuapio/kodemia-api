@@ -1,8 +1,8 @@
+require('dotenv').config()
+
 // Este archivo debe poner la aplicación en marcha
-
-const dbConnect = require('./src/lib/db')
-const server = require('./src/server')
-
+const dbConnect = require('./src/lib/db.js')
+const server = require('./src/server.js')
 
 dbConnect()
     .then(() => {

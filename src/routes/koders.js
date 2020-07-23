@@ -1,31 +1,47 @@
 const express = require('express')
 const koders = require('../usecases/koders')
-const { response } = require('express')
+const { response, request } = require('express')
 
 const router = express.Router()
 
+const auth = require('../middlewares/auth')
 
-// localhost:8080/koders
-router.get('/', async (request, response) => {
-    try {
-        const allKoders = await koders.getAll()
-        response.json({
-            success: true,
-            data: {
-                koders: allKoders
-            }
-        })
-    } catch (error) {
-        response.status(400)
-        response.json({
-            success: false,
-            error: error.message
-        })
-    }
+//middleware a nivel de router
+router.use((request, response, next) => {
+    console.log('middleware a nivel de router koders: ', request.charles)
+    next()
+}, (request, response, next) => {
+    console.log('middleware router koder 2')
+    next()
 })
 
-router.post('/', async (request, response) => {
+// localhost:8080/koders
+router.get('/', (request, response, next) => {
+    console.log('middleware de endpoint GET Koders')
+    next()
+},
+    async (request, response) => {
+        try {
+            const allKoders = await koders.getAll()
+            response.json({
+                success: true,
+                data: {
+                    koders: allKoders
+                }
+            })
+        } catch (error) {
+            response.status(400)
+            response.json({
+                success: false,
+                error: error.message
+            })
+        }
+    })
+
+router.post('/', auth, async (request, response) => {
     try {
+        console.log('koder: ', request.koder)
+
         const newKodersData = request.body
         const newKoder = await koders.create(newKodersData)
         response.json({
